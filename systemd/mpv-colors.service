@@ -1,0 +1,6 @@
+[Unit]
+Description=Aktualizacja kolorow UOSC w MPV
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/update-colors.sh

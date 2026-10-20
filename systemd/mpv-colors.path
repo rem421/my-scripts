@@ -1,0 +1,8 @@
+[Unit]
+Description=Nadzorowanie zmian pliku kolorow Ryoku
+
+[Path]
+PathChanged=%h/.config/fastfetch/ryoku-colors.json
+
+[Install]
+WantedBy=default.target
