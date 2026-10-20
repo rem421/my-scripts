@@ -1,0 +1,15 @@
+[Unit]
+# Seanime background server
+Description=Seanime Background Service
+After=network.target
+
+[Service]
+Type=simple
+# Execute the seanime binary from the environment
+ExecStart=/usr/bin/env seanime
+# Automatically restart the service if it crashes
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
