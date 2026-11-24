@@ -8,10 +8,11 @@ rm -rf ~/.config/mpv
 git clone https://github.com/Chinna95P/mpv-anime-build.git ~/.config/mpv
 
 # 2. Install custom scripts
-echo "[INFO] Step 2/4: Installing Ryoku synchronization scripts..."
+echo "[INFO] Step 2/4: Installing Ryoku synchronization and RPi5 scripts..."
 mkdir -p ~/.local/bin
 cp bin/update-colors.sh ~/.local/bin/
-chmod +x ~/.local/bin/update-colors.sh
+cp bin/rpivnc ~/.local/bin/
+chmod +x ~/.local/bin/update-colors.sh ~/.local/bin/rpivnc
 
 # 3. Install and activate systemd services
 echo "[INFO] Step 3/4: Configuring systemd background automation..."

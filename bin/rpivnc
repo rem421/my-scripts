@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -u
+
+# Mostek schowka NixOS (Wayland/Niri) -> RPi5 (X11 :2) z ominięciem buga XWayland w TigerVNC
+exec 3> >(ssh -o BatchMode=yes rpi5 'GDK_BACKEND=x11 DISPLAY=:2 python3 ~/.local/bin/rpi-clip-daemon.py' >/dev/null 2>&1)
+wl-paste --type text --no-newline --watch sh -c 'base64 -w0; echo' >&3 2>/dev/null &
+WL_PID=$!
+
+cleanup() {
+  kill "$WL_PID" 2>/dev/null || true
+  exec 3>&- 2>/dev/null || true
+}
+trap cleanup EXIT INT TERM
+
+# Szybki TigerVNC: RPi5 -> NixOS idzie przez AcceptClipboard=1, a NixOS -> RPi5 przez nasz mostek wyżej
+vncviewer -AutoSelect=0 -FullColor -NoJPEG -SendClipboard=0 -SendPrimary=0 -AcceptClipboard=1 rpi5:5902
